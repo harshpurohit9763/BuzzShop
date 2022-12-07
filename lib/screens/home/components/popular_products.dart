@@ -1,9 +1,8 @@
-import 'package:buzz/controllers/productsFetch2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../constants.dart';
-import '../../../models/Product.dart';
+import '../../../controllers/productsFetch1.dart';
 import '../../details/details_screen.dart';
 import 'product_card.dart';
 import 'section_title.dart';
@@ -18,7 +17,7 @@ class PopularProducts extends StatefulWidget {
 }
 
 class _PopularProductsState extends State<PopularProducts> {
-  FetchProductsFromapi2 controller = Get.put(FetchProductsFromapi2());
+  FetchProducts controller = Get.put(FetchProducts());
   @override
   void initState() {
     // TODO: implement initState
@@ -43,14 +42,14 @@ class _PopularProductsState extends State<PopularProducts> {
           scrollDirection: Axis.horizontal,
           child: Row(
             children: List.generate(
-              demo_product.length,
+              4,
               (index) => Padding(
                 padding: const EdgeInsets.only(right: defaultPadding),
                 child: ProductCard(
                   title: controller.productsList[index]['title'],
-                  image: controller.productsList[index]['category']['image'],
+                  image: controller.productsList[index]['image'],
                   price: controller.productsList[index]["price"],
-                  bgColor: demo_product[index].bgColor,
+                  bgColor: bgColor,
                   press: () {
                     Get.to(
                         DetailsScreen(

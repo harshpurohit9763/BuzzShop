@@ -1,11 +1,13 @@
+import 'package:buzz/models/Category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 import '../../../constants.dart';
-import '../../../models/Category.dart';
+import '../../../controllers/productsFetch1.dart';
 
 class Categories extends StatelessWidget {
-  const Categories({
+  Categories({
     Key? key,
   }) : super(key: key);
 

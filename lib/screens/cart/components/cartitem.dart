@@ -6,8 +6,8 @@ import 'package:get/get.dart';
 import '../../../constants.dart';
 import '../../../controllers/productsFetch1.dart';
 
-class ProductCard extends StatelessWidget {
-  ProductCard({
+class ItemCart extends StatelessWidget {
+  ItemCart({
     Key? key,
     required this.press,
     required this.price,
@@ -33,7 +33,7 @@ class ProductCard extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(defaultBorderRadius)),
         ),
-        child: Column(
+        child: Row(
           children: [
             Container(
               width: double.infinity,

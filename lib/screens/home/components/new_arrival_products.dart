@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 
 import '../../../constants.dart';
 import '../../../controllers/productsFetch1.dart';
-import '../../../models/Product.dart';
 import '../../details/details_screen.dart';
 import 'product_card.dart';
 import 'section_title.dart';
@@ -43,14 +42,14 @@ class _NewArrivalProductsState extends State<NewArrivalProducts> {
           scrollDirection: Axis.horizontal,
           child: Row(
             children: List.generate(
-              demo_product.length,
+              4,
               (index) => Padding(
                 padding: const EdgeInsets.only(right: defaultPadding),
                 child: ProductCard(
                   title: controller.productsList[index]['title'],
                   image: controller.productsList[index]['image'],
                   price: controller.productsList[index]["price"],
-                  bgColor: demo_product[index].bgColor,
+                  bgColor: bgColor,
                   press: () {
                     Get.to(
                       DetailsScreen(

@@ -2,8 +2,6 @@ import 'dart:developer';
 
 import 'package:buzz/constants.dart';
 import 'package:buzz/controllers/apicontroller1.dart';
-import 'package:buzz/controllers/productsFetch2.dart';
-import 'package:buzz/models/Product.dart';
 import 'package:buzz/screens/cart/cart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -23,22 +21,11 @@ class DetailsScreen extends StatefulWidget {
 
 class _DetailsScreenState extends State<DetailsScreen> {
   FetchProducts controller = Get.put(FetchProducts());
-  FetchProductsFromapi2 controllerfromapi2 = Get.put(FetchProductsFromapi2());
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    controller.loadProductsFromRepo();
-    controllerfromapi2.loadProductsFromRepo();
-  }
 
   var products = Get.arguments[0];
 
   @override
   Widget build(BuildContext context) {
-    print("above data and dbelow data");
-    print(widget.product);
     return Scaffold(
       backgroundColor: bgColor,
       appBar: AppBar(
@@ -54,7 +41,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
             children: [
               GestureDetector(
                 onTap: () {
-                  Get.to(CartScreen());
+                  Get.to(() => CartScreen());
                 },
                 child: Icon(
                   Icons.shopping_bag_outlined,
@@ -77,13 +64,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
       body: Column(
         children: [
           Image.network(
-            products[widget.product]['category'] == null
-                ? products[widget.product]['image']
-                : products[widget.product]['category']['image'],
+            products[widget.product]['image'],
             height: MediaQuery.of(context).size.height * 0.4,
             fit: BoxFit.cover,
           ),
-          const SizedBox(height: defaultPadding * 1.5),
           Expanded(
             child: Container(
               padding: const EdgeInsets.fromLTRB(defaultPadding,
@@ -98,21 +82,11 @@ class _DetailsScreenState extends State<DetailsScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          products[widget.product]['title'],
-                          style: Theme.of(context).textTheme.headline6,
-                        ),
-                      ),
-                      const SizedBox(width: defaultPadding),
-                      Text(
-                        "\$" + products[widget.product]['price'].toString(),
-                        style: Theme.of(context).textTheme.headline6,
-                      ),
-                    ],
+                  Text(
+                    products[widget.product]['title'],
+                    style: Theme.of(context).textTheme.headline6,
                   ),
+                  const SizedBox(width: defaultPadding),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: defaultPadding),
                     child: Text(
@@ -125,28 +99,36 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   ),
                   const SizedBox(height: defaultPadding / 2),
                   Row(
-                    children: const [
-                      ColorDot(
-                        color: Color(0xFFBEE8EA),
-                        isActive: false,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: const [
+                          ColorDot(
+                            color: Color(0xFFBEE8EA),
+                            isActive: false,
+                          ),
+                          ColorDot(
+                            color: Color(0xFF141B4A),
+                            isActive: true,
+                          ),
+                          ColorDot(
+                            color: Color(0xFFF4E5C3),
+                            isActive: false,
+                          ),
+                        ],
                       ),
-                      ColorDot(
-                        color: Color(0xFF141B4A),
-                        isActive: true,
-                      ),
-                      ColorDot(
-                        color: Color(0xFFF4E5C3),
-                        isActive: false,
+                      Text(
+                        "\$" + products[widget.product]['price'].toString(),
+                        style: Theme.of(context).textTheme.headline6,
                       ),
                     ],
                   ),
-                  const SizedBox(height: defaultPadding * 2),
                   Center(
                     child: SizedBox(
                       width: 200,
                       height: 48,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () async {},
                         style: ElevatedButton.styleFrom(
                             primary: primaryColor,
                             shape: const StadiumBorder()),
